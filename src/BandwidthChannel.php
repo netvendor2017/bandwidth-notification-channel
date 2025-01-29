@@ -32,8 +32,10 @@ class BandwidthChannel
 
     public function send($notifiable, Notification $notification)
     {
-        $to = $notifiable->routeNotificationFor('Bandwidth', $notification);
-        $to = $to ?? $notifiable->phone ?? $notifiable->phone_number;
+        $to = $notifiable->routeNotificationFor('Bandwidth', $notification)
+            ?? $notifiable->phone
+            ?? $notifiable->phone_number
+        ;
 
         if (! $to) {
             return null;
