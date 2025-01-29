@@ -30,6 +30,11 @@ class BandwidthMessage implements Arrayable
         return $this->setParameter('from', $from);
     }
 
+    public function to(string $to) : self
+    {
+        return $this->setParameter('to', $to);
+    }
+
     /**
      * Set the media url(s) for MMS messages.
      *

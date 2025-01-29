@@ -32,7 +32,12 @@ class BandwidthChannel
 
     public function send($notifiable, Notification $notification)
     {
-        if (!$to = $notifiable->routeNotificationFor('Bandwidth', $notification)) {
+        $to = $notifiable->routeNotificationFor('Bandwidth', $notification)
+            ?? $notifiable->phone
+            ?? $notifiable->phone_number
+        ;
+
+        if (! $to) {
             return null;
         }
 
@@ -94,7 +99,7 @@ class BandwidthChannel
     {
         return array_merge([
             'from' => $this->config->getFrom(),
-            'to' => $to,
+            'to' => $message->getParameter('to', $to),
             'applicationId' => $this->config->getApplicationId(),
         ], $message->toArray());
     }
