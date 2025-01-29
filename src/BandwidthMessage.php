@@ -30,7 +30,7 @@ class BandwidthMessage implements Arrayable
         return $this->setParameter('from', $from);
     }
 
-    public function to(string $to): self
+    public function to(string $to) : self
     {
         return $this->setParameter('to', $to);
     }
